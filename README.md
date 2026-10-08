@@ -1,22 +1,26 @@
 # Portfolio
 
-This project was created with Vue 3 and TypeScript.
+This repository is structured into separate `backend` and `frontend` folders.
 
-## Getting started
+## Frontend
 
 ```bash
+cd frontend
 npm install
 npm run dev
 ```
 
-Then open the local Vite URL shown in the terminal.
-
-## Build for production
+## Backend
 
 ```bash
-npm run build
+cd backend
+npm install
+npm run dev
 ```
 
-## Customize
+## Production build
 
-Update the content in `src/App.vue` and the styling in `src/style.css` to match your portfolio.
+```bash
+cd frontend
+npm run build
+```
