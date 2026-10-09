@@ -31,6 +31,10 @@ Useful commands: `npm run build` (type-check and production build), `npm run typ
 
 The current profiles are configured in `frontend/src/config/site.ts`: GitHub user `DuukvandenBosch` and HvA GitLab user `boschdp` at `https://gitlab.fdmci.hva.nl`. To curate featured repositories, add a canonical repository URL as a key in `frontend/src/data/portfolio.ts`, optionally with `intro`, `highlights`, and `technologies`. No UI component needs editing.
 
+## Contact details
+
+The contact page and footer use the centralized links in `frontend/src/config/site.ts`: `duukvandenbosch@gmail.com`, LinkedIn at `https://www.linkedin.com/in/duukvandenbosch`, GitHub, and HvA GitLab. Optional social links are filtered from that configuration, so an unconfigured link is never rendered.
+
 ## Repository integrations
 
 Both public APIs are called directly from the browser without tokens. GitHub uses its user repositories endpoint; GitLab uses the configured host’s v4 user projects endpoint. Requests are paginated and capped to protect visitors from excessive calls. The configured HvA GitLab endpoint was verified from a separate browser origin: it currently returns HTTP 200 with a CORS response and an empty public-project array (`x-total: 0`), so an empty GitLab section is a visibility result rather than a frontend failure. GitHub/GitLab rate limits, anonymous-access restrictions, CORS, or downtime are shown as partial errors while the other source remains available. Successful results are cached in `localStorage` for 15 minutes. If a source is unavailable before any result is cached, the page remains usable and links to both profiles are available from Contact.
