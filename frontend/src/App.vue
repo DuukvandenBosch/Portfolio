@@ -19,7 +19,6 @@
           <RouterLink v-for="item in navItems" :key="item.to" :to="item.to" @click="menuOpen = false">{{
             item.label
           }}</RouterLink>
-          <RouterLink class="nav-contact" to="/contact" @click="menuOpen = false">Contact ↗</RouterLink>
         </nav>
       </div>
     </header>
