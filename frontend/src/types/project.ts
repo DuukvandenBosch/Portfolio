@@ -4,6 +4,7 @@ export interface Project {
   name: string
   description: string
   url: string
+  liveUrl?: string
   source: ProjectSource
   language?: string
   topics: string[]

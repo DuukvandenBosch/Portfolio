@@ -10,6 +10,7 @@ interface GithubRepository {
   updated_at: string
   stargazers_count: number
   fork: boolean
+  homepage?: string | null
 }
 export async function fetchGithubProjects(): Promise<Project[]> {
   const projects: Project[] = []
@@ -27,6 +28,7 @@ export async function fetchGithubProjects(): Promise<Project[]> {
           name: repo.name,
           description: repo.description ?? '',
           url: repo.html_url,
+          liveUrl: repo.homepage || undefined,
           source: 'GitHub' as const,
           language: repo.language ?? undefined,
           topics: repo.topics ?? [],
