@@ -2,10 +2,10 @@
   <div class="site-shell">
     <header class="site-header">
       <div class="shell header-inner">
-        <RouterLink class="wordmark" to="/" aria-label="Duuk van den Bosch home"
-          ><span class="wordmark-mark">D<span>v</span>B</span
-          ><span class="wordmark-name">Duuk van den Bosch</span></RouterLink
-        >
+        <RouterLink class="wordmark" to="/" aria-label="Duuk van den Bosch home">
+          <span class="wordmark-mark">D<span>vd</span>B</span>
+          <span class="wordmark-name">Duuk van den Bosch</span>
+        </RouterLink>
         <button
           class="menu-toggle"
           type="button"
@@ -29,8 +29,8 @@
         <p>© {{ new Date().getFullYear() }} Duuk van den Bosch</p>
         <p class="footer-note">Software engineering · Amsterdam</p>
         <div class="footer-links">
-          <RouterLink to="/contact">Get in touch</RouterLink
-          ><a href="https://gitlab.fdmci.hva.nl/boschdp" target="_blank" rel="noreferrer">GitLab ↗</a>
+          <RouterLink to="/contact">Get in touch</RouterLink>
+          <a href="https://gitlab.fdmci.hva.nl/boschdp" target="_blank" rel="noreferrer">GitLab ↗</a>
         </div>
       </div>
     </footer>
