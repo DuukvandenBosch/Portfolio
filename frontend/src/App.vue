@@ -3,8 +3,7 @@
     <header class="site-header">
       <div class="shell header-inner">
         <RouterLink class="wordmark" to="/" aria-label="Duuk van den Bosch home"
-          ><span class="wordmark-mark">D<span>vd</span>B</span
-          ><span class="wordmark-name">Duuk van den Bosch</span></RouterLink
+          ><span class="wordmark-mark">D<span>vd</span>B</span></RouterLink
         >
         <button
           class="menu-toggle"
@@ -23,16 +22,6 @@
       </div>
     </header>
     <main><RouterView /></main>
-    <section class="footer-cta shell" aria-labelledby="footer-cta-title">
-      <div>
-        <p class="eyebrow">Open channel / 05</p>
-        <h2 id="footer-cta-title">Let's make something<br /><em>useful.</em></h2>
-      </div>
-      <div class="footer-cta-side">
-        <p>For collaborations, questions, or a good software problem.</p>
-        <RouterLink class="button accent" to="/contact">Start a conversation <span>↗</span></RouterLink>
-      </div>
-    </section>
     <footer class="site-footer">
       <div class="shell footer-inner">
         <p>© {{ new Date().getFullYear() }} Duuk van den Bosch</p>
@@ -51,6 +40,9 @@ const menuOpen = ref(false)
 const navItems = [
   { label: 'About', to: '/about' },
   { label: 'Projects', to: '/projects' },
+  { label: 'Work log', to: '/work-log' },
+  { label: 'Journal', to: '/journal' },
+  { label: 'Activity', to: '/activity' },
   { label: 'Contact', to: '/contact' },
 ]
 </script>

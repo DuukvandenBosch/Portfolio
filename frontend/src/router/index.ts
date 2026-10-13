@@ -4,12 +4,20 @@ import AboutPage from '../pages/AboutPage.vue'
 import ProjectsPage from '../pages/ProjectsPage.vue'
 import ContactPage from '../pages/ContactPage.vue'
 import NotFoundPage from '../pages/NotFoundPage.vue'
+import WorkLogPage from '../pages/WorkLogPage.vue'
+import JournalPage from '../pages/JournalPage.vue'
+import SprintArticlePage from '../pages/SprintArticlePage.vue'
+import ActivityPage from '../pages/ActivityPage.vue'
 
 const routes = [
   { path: '/', name: 'home', component: HomePage },
   { path: '/about', name: 'about', component: AboutPage },
   { path: '/projects', name: 'projects', component: ProjectsPage },
   { path: '/contact', name: 'contact', component: ContactPage },
+  { path: '/work-log', name: 'work-log', component: WorkLogPage },
+  { path: '/journal', name: 'journal', component: JournalPage },
+  { path: '/journal/:slug', name: 'sprint-article', component: SprintArticlePage },
+  { path: '/activity', name: 'activity', component: ActivityPage },
   { path: '/:pathMatch(.*)*', name: 'not-found', component: NotFoundPage },
 ]
 
