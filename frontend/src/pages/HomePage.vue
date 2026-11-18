@@ -1,88 +1,25 @@
 <template>
-  <div class="shell home-page">
-    <section class="home-hero">
-      <div>
-        <p class="eyebrow">Software engineering / 01</p>
-        <h1 class="display">Duuk van<br /><em>den Bosch.</em></h1>
-        <p class="hero-kicker">Software Engineering student & developer</p>
-      </div>
-      <div class="hero-aside">
-        <p>
-          I build useful software with a focus on backend systems, APIs, and the details that make products dependable.
-        </p>
-        <div class="hero-meta">
-          <span class="mono">Based in Amsterdam</span><span class="mono">Java / TypeScript / Vue</span>
-        </div>
-        <div class="actions">
-          <RouterLink to="/projects" class="button accent">Explore projects <span>↗</span></RouterLink
-          ><RouterLink to="/contact" class="text-link">Contact me ↗</RouterLink>
-        </div>
-      </div>
+  <div class="portfolio-page">
+    <section id="top" data-section class="hero-section">
+      <div class="hero-section__meta"><span>Portfolio / 2025</span><span>NL — 51.44°N</span></div>
+      <h1>Duuk van den<br /><em>Bosch</em></h1>
+      <div class="hero-section__statement"><span>[ 01 ]</span><p>Building considered software and digital experiences through logic, craft and curiosity.</p></div>
+      <span class="hero-section__signal">011 / BUILD / ITERATE</span>
+      <div class="hero-section__role">Software<br /><span>Engineer</span></div>
+      <a class="hero-section__scroll" href="#work">Scroll to explore <span>↓</span></a>
+      <div class="hero-geometry" aria-hidden="true"><span class="hero-geometry__circle"></span><span class="hero-geometry__square"></span><span class="hero-geometry__square hero-geometry__square--inner"></span><span class="hero-geometry__dot"></span></div>
     </section>
-    <section class="home-intro section-rule">
-      <p class="eyebrow">A considered approach</p>
-      <p class="intro-copy">
-        I like understanding how things work, then making them work better. Clear interfaces, maintainable code, and
-        software that solves a real need.
-      </p>
-    </section>
-    <section class="home-projects" aria-labelledby="home-projects-title">
-      <div class="section-heading">
-        <p class="eyebrow">Selected repositories / 02</p>
-        <RouterLink to="/projects" class="text-link">View all work ↗</RouterLink>
-      </div>
-      <h2 id="home-projects-title" class="section-title">Built with<br /><em>intent.</em></h2>
-      <div v-if="projects.length" class="featured-grid">
-        <article
-          v-for="(project, index) in projects.slice(0, 3)"
-          :key="project.id"
-          class="featured-project"
-          :class="`featured-project--${index + 1}`"
-        >
-          <div class="featured-project-top">
-            <span class="mono">0{{ index + 1 }} / {{ project.source }}</span
-            ><span class="featured-links"
-              ><a :href="project.url" target="_blank" rel="noreferrer" :aria-label="`Open ${project.name} repository`"
-                >↗</a
-              ><a
-                v-if="project.liveUrl"
-                :href="project.liveUrl"
-                target="_blank"
-                rel="noreferrer"
-                :aria-label="`Open ${project.name} live demo`"
-                >◌</a
-              ></span
-            >
-          </div>
-          <h3>{{ project.name }}</h3>
-          <p>
-            {{
-              project.featured?.intro || project.description || 'Repository details available on the source platform.'
-            }}
-          </p>
-          <div class="tag-list">
-            <span v-if="project.language">{{ project.language }}</span
-            ><span v-for="topic in project.topics.slice(0, 3)" :key="topic">{{ topic }}</span>
-          </div>
-        </article>
-      </div>
-      <p v-else class="project-state">Live repositories will appear here when available.</p>
-    </section>
-    <section class="home-bottom">
-      <div>
-        <p class="eyebrow">Currently exploring</p>
-        <p class="muted">TypeScript · Python · React · REST APIs</p>
-      </div>
-      <RouterLink to="/about" class="text-link">More about me ↗</RouterLink>
-    </section>
+    <PortfolioWorkSection />
+    <ProfileSection />
+    <SkillsSection />
+    <JournalSection />
+    <ContactSection />
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { fetchProjects } from '../services/projects'
-import type { Project } from '../types/project'
-const projects = ref<Project[]>([])
-onMounted(async () => {
-  projects.value = (await fetchProjects()).projects
-})
+import ContactSection from '../components/ContactSection.vue'
+import JournalSection from '../components/JournalSection.vue'
+import PortfolioWorkSection from '../components/PortfolioWorkSection.vue'
+import ProfileSection from '../components/ProfileSection.vue'
+import SkillsSection from '../components/SkillsSection.vue'
 </script>
