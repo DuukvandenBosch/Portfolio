@@ -109,7 +109,10 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-
 .skill-row__items { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 22px; letter-spacing: -0.04em; }
 .skill-row__mark { width: 18px; height: 18px; border: 1px solid var(--acid); position: relative; }
 .skill-row__mark::after { content: ''; position: absolute; width: 7px; height: 7px; background: var(--acid); left: 4px; top: 4px; }
-.journal-list { border-top: 1px solid var(--line); }
+.journal-list { max-height: 31rem; overflow-y: auto; overscroll-behavior: contain; border-top: 1px solid var(--line); scrollbar-color: var(--acid) var(--ink); scrollbar-gutter: stable; }
+.journal-list:focus-visible { outline: 2px solid var(--acid); outline-offset: 6px; }
+.journal-scroll-note { margin: 14px 0 0 120px; color: var(--muted); font: 10px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.journal-scroll-note span { color: var(--acid); font-size: 14px; }
 .journal-signal button { grid-template-columns: 120px 1fr 130px 60px; }
 .journal-signal button:hover, .journal-signal.open button { color: var(--acid); }
 .journal-signal button span, .journal-signal button small, .journal-signal button b { font: 10px var(--mono); color: var(--muted); text-transform: uppercase; font-weight: 400; }
@@ -176,6 +179,8 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-
   .journal-signal__body { grid-template-columns: 1fr; gap: 24px; padding-left: 70px; }
   .journal-summary { grid-row: auto; }
   .journal-detail-block--next { grid-column: auto; }
+  .journal-list { max-height: 28rem; }
+  .journal-scroll-note { margin-left: 70px; }
   .contact-links { grid-template-columns: 1fr 1fr; }
   .contact-links a:nth-child(2n) { border-right: 0; padding-left: 15px; }
   .contact-links a:nth-child(n + 3) { border-top: 1px solid #7b9b25; }
