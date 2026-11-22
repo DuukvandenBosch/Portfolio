@@ -10,6 +10,8 @@ interface GitlabProject {
   last_activity_at?: string
   star_count?: number
   archived?: boolean
+  visibility?: string
+  empty_repo?: boolean
 }
 export async function fetchGitlabProjects(): Promise<Project[]> {
   const projects: Project[] = []
@@ -22,7 +24,7 @@ export async function fetchGitlabProjects(): Promise<Project[]> {
     const repositories = (await response.json()) as GitlabProject[]
     projects.push(
       ...repositories
-        .filter((repo) => !repo.archived)
+        .filter((repo) => repo.visibility === 'public' && !repo.archived && !repo.empty_repo)
         .map((repo) => ({
           id: `gitlab-${repo.id}`,
           name: repo.name,

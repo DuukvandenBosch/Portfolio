@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-20T00:00:00Z",
+  "title": "Design System: DVDB Signal Console",
+  "extensions": {
+    "motion": [
+      { "name": "signal-rise", "value": "cubic-bezier(.16,1,.3,1)", "purpose": "One-time activity trace entrance." }
+    ],
+    "breakpoints": [
+      { "name": "rail-collapse", "value": "900px" }
+    ],
+    "narrative": {
+      "northStar": "The Signal Console",
+      "overview": "This portfolio behaves like a working instrument for inspecting software work. Near-black space, etched rules, readouts, and signal traces create a technical environment, while oversized off-white and acid-lime type keeps the human author unmistakable.",
+      "keyCharacteristics": ["Instrument-like navigation", "Oversized display type", "Acid lime as active signal", "Hard rectangular surfaces", "Evidence paired with context"],
+      "rules": [{ "name": "The Active Signal Rule", "body": "Lime means active, selected, live, or actionable. Do not scatter it as decoration.", "section": "colors" }, { "name": "The Two-Voice Rule", "body": "Use Space Grotesk for what Duuk says; use DM Mono for what the system measures.", "section": "typography" }],
+      "dos": ["Do use acid lime only for active signals, selected navigation, and clear actions.", "Do pair public repository data with human explanation and honest fallback states."],
+      "donts": ["Don't add gradients, glassmorphism, generic glowing borders, or rounded card grids.", "Don't turn activity counts into unsupported performance claims."]
+    }
+  }
+}

@@ -10,6 +10,8 @@ interface GithubRepository {
   updated_at: string
   stargazers_count: number
   fork: boolean
+  archived?: boolean
+  size?: number
   homepage?: string | null
 }
 export async function fetchGithubProjects(): Promise<Project[]> {
@@ -22,7 +24,7 @@ export async function fetchGithubProjects(): Promise<Project[]> {
     const repositories = (await response.json()) as GithubRepository[]
     projects.push(
       ...repositories
-        .filter((repo) => !repo.fork)
+        .filter((repo) => !repo.fork && !repo.archived && ((repo.size ?? 0) > 0 || Boolean(repo.description) || Boolean(repo.topics?.length)))
         .map((repo) => ({
           id: `github-${repo.id}`,
           name: repo.name,

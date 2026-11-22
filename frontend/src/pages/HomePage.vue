@@ -1,88 +1,61 @@
 <template>
-  <div class="shell home-page">
-    <section class="home-hero">
-      <div>
-        <p class="eyebrow">Software engineering / 01</p>
-        <h1 class="display">Duuk van<br /><em>den Bosch.</em></h1>
-        <p class="hero-kicker">Software Engineering student & developer</p>
-      </div>
-      <div class="hero-aside">
-        <p>
-          I build useful software with a focus on backend systems, APIs, and the details that make products dependable.
-        </p>
-        <div class="hero-meta">
-          <span class="mono">Based in Amsterdam</span><span class="mono">Java / TypeScript / Vue</span>
-        </div>
-        <div class="actions">
-          <RouterLink to="/projects" class="button accent">Explore projects <span>↗</span></RouterLink
-          ><RouterLink to="/contact" class="text-link">Contact me ↗</RouterLink>
-        </div>
-      </div>
-    </section>
-    <section class="home-intro section-rule">
-      <p class="eyebrow">A considered approach</p>
-      <p class="intro-copy">
-        I like understanding how things work, then making them work better. Clear interfaces, maintainable code, and
-        software that solves a real need.
-      </p>
-    </section>
-    <section class="home-projects" aria-labelledby="home-projects-title">
-      <div class="section-heading">
-        <p class="eyebrow">Selected repositories / 02</p>
-        <RouterLink to="/projects" class="text-link">View all work ↗</RouterLink>
-      </div>
-      <h2 id="home-projects-title" class="section-title">Built with<br /><em>intent.</em></h2>
-      <div v-if="projects.length" class="featured-grid">
-        <article
-          v-for="(project, index) in projects.slice(0, 3)"
-          :key="project.id"
-          class="featured-project"
-          :class="`featured-project--${index + 1}`"
-        >
-          <div class="featured-project-top">
-            <span class="mono">0{{ index + 1 }} / {{ project.source }}</span
-            ><span class="featured-links"
-              ><a :href="project.url" target="_blank" rel="noreferrer" :aria-label="`Open ${project.name} repository`"
-                >↗</a
-              ><a
-                v-if="project.liveUrl"
-                :href="project.liveUrl"
-                target="_blank"
-                rel="noreferrer"
-                :aria-label="`Open ${project.name} live demo`"
-                >◌</a
-              ></span
-            >
-          </div>
-          <h3>{{ project.name }}</h3>
-          <p>
-            {{
-              project.featured?.intro || project.description || 'Repository details available on the source platform.'
-            }}
-          </p>
-          <div class="tag-list">
-            <span v-if="project.language">{{ project.language }}</span
-            ><span v-for="topic in project.topics.slice(0, 3)" :key="topic">{{ topic }}</span>
-          </div>
-        </article>
-      </div>
-      <p v-else class="project-state">Live repositories will appear here when available.</p>
-    </section>
-    <section class="home-bottom">
-      <div>
-        <p class="eyebrow">Currently exploring</p>
-        <p class="muted">TypeScript · Python · React · REST APIs</p>
-      </div>
-      <RouterLink to="/about" class="text-link">More about me ↗</RouterLink>
-    </section>
+  <div class="console-shell">
+    <aside class="console-rail" aria-label="Portfolio navigation">
+      <a class="console-mark" href="#top" aria-label="Duuk van den Bosch home">DVDB<span>/SYS</span></a>
+      <div class="rail-status"><span class="status-dot" aria-hidden="true"></span><span>Available for<br />good problems</span></div>
+      <nav class="rail-nav">
+        <a v-for="channel in channels" :key="channel.id" :href="`#${channel.id}`" :class="{ active: activeChannel === channel.id }" @click="activeChannel = channel.id"><span>{{ channel.label }}</span><small>{{ channel.code }}</small></a>
+      </nav>
+      <div class="rail-footer"><span>NL / 2026</span></div>
+    </aside>
+
+    <div class="console-content">
+      <header class="topline"><span>Software engineer / portfolio system</span><span class="topline__right"><span class="signal-live">Live</span> Public data, private thinking</span></header>
+
+      <section id="home" data-section class="signal-hero">
+        <div class="hero-copy"><p class="console-kicker">Duuk van den Bosch / HBO-ICT</p><h1>Duuk<br />van den Bosch</h1><p class="hero-lede">Software engineering student exploring the space between robust systems, useful interfaces, and the questions that make both worth building.</p><a class="signal-action" href="#work"><span>Inspect the work</span><span class="action-line" aria-hidden="true"></span></a></div>
+        <div class="hero-instrument" aria-label="Repository activity signal"><div class="instrument-head"><span>ACTIVITY / 15 MIN CACHE</span><span>{{ activityLabel }}</span></div><div class="signal-graph" :class="{ 'is-empty': !activity.commits.length }" aria-hidden="true"><i v-for="(bar, index) in signalBars" :key="index" :style="{ height: `${bar}%` }"></i></div><div class="instrument-readout"><strong>{{ activity.commits.length ? activity.commits.length : '—' }}</strong><span>recent public<br />commit signals</span></div><p class="instrument-note">{{ activity.commits.length ? 'GitHub + HvA GitLab / normalized activity' : 'Public activity will appear here when available' }}</p></div>
+        <div class="hero-coordinates" aria-hidden="true"><span>01</span><span>WORK / SIGNAL / TRACE</span><span>Scroll to enter</span></div>
+      </section>
+
+      <section id="work" data-section class="channel-section work-channel"><div class="section-index"><span>CH. 01</span><span>Selected work</span></div><div class="channel-intro"><h2>Systems with<br /><em>a reason</em></h2><p>Selected projects, experiments, and public repository evidence. Open a signal to see what it is doing, how it is built, and where to follow it.</p></div><div class="project-instrument" :class="{ 'is-loading': projectsLoading }"><div class="project-instrument__head"><span>PROJECT CHANNEL</span><span>{{ projects.length ? `${projects.length} signals` : 'Scanning repositories' }}</span></div><article v-for="(project, index) in projectRows" :key="project.id" class="project-signal" :class="{ open: openProject === project.id }"><button type="button" class="project-signal__trigger" :aria-expanded="openProject === project.id" @click="toggleProject(project.id)"><span class="project-signal__number">0{{ index + 1 }}</span><span class="project-signal__name">{{ project.name }}</span><span class="project-signal__type">{{ project.label }}</span><span class="project-signal__state">{{ openProject === project.id ? 'Close' : 'Inspect' }}</span></button><div v-if="openProject === project.id" class="project-signal__detail"><p>{{ project.description }}</p><div class="detail-meta"><span>{{ project.technologies.join(' · ') }}</span><span v-if="project.updatedAt">Updated {{ formatDate(project.updatedAt) }}</span><span v-if="project.private" class="private-project-note">{{ project.privateNote }}</span><a v-else-if="project.url" :href="project.url" target="_blank" rel="noreferrer">Open repository</a><span v-else>Private repository / link unavailable</span></div></div></article><p v-if="projectsLoading" class="data-note" role="status">Scanning public GitHub and HvA GitLab repositories…</p><p v-else-if="!projectRows.length && !projectErrors.length" class="data-note" role="status">No eligible public repositories were found.</p><p v-if="projectErrors.length" class="data-note" role="status">Repository note: {{ projectErrors[0] }} Private school projects remain visible.</p></div></section>
+
+      <section id="about" data-section class="channel-section about-channel"><div class="section-index"><span>CH. 02</span><span>Profile / context</span></div><div class="profile-grid"><div><p class="console-kicker">Human logic / machine logic</p><h2>Curious about<br /><em>the whole system</em></h2></div><div class="profile-copy"><p>{{ aboutData.introduction }}</p><p>{{ aboutData.profile }}</p><a class="text-action" href="#contact">Talk through a problem</a></div></div><div class="record-grid"><div class="record-block"><span class="record-label">EXPERIENCE</span><div v-for="item in aboutData.experience.slice(0, 3)" :key="item.organization" class="record-row"><span>{{ item.period }}</span><strong>{{ item.role }}</strong><small>{{ item.organization }}</small></div></div><div class="record-block"><span class="record-label">EDUCATION</span><div v-for="item in aboutData.education.slice(0, 2)" :key="item.organization" class="record-row"><span>{{ item.period }}</span><strong>{{ item.role }}</strong><small>{{ item.organization }}</small></div></div></div></section>
+
+      <section id="stack" data-section class="channel-section stack-channel"><div class="section-index"><span>CH. 03</span><span>Technical field</span></div><div class="stack-heading"><h2>Tools are<br /><em>thinking made visible</em></h2><p>From domain logic to the interface that explains it, I like understanding how the pieces hold together.</p></div><div class="skill-matrix"><div v-for="(items, group) in skillGroups" :key="group" class="skill-row"><span class="skill-row__label">{{ group }}</span><div class="skill-row__items"><span v-for="item in items" :key="item">{{ item }}</span></div><span class="skill-row__mark" aria-hidden="true"></span></div></div></section>
+
+      <section id="journal" data-section class="channel-section journal-channel"><div class="section-index"><span>CH. 04</span><span>Development journal</span></div><div class="journal-heading"><h2>What changed<br /><em>while building</em></h2><p>A work log for decisions, experiments, problems, and the lessons that do not fit inside a commit message.</p></div><div class="journal-list" tabindex="0" aria-label="Scrollable development journal"><article v-for="(entry, index) in journalEntries" :key="entry.id" class="journal-signal" :class="{ open: openEntry === entry.id }"><button type="button" :aria-expanded="openEntry === entry.id" :aria-controls="`journal-detail-${entry.id}`" @click="openEntry = openEntry === entry.id ? '' : entry.id"><span>LOG / {{ String(index + 1).padStart(2, '0') }}</span><strong>{{ entry.title }}</strong><small>{{ formatDate(entry.date) }}</small><b>{{ openEntry === entry.id ? 'Close' : 'Read' }}</b></button><div v-if="openEntry === entry.id" :id="`journal-detail-${entry.id}`" class="journal-signal__body"><div class="journal-summary"><p>{{ entry.summary }}</p><span>{{ entry.project }}<template v-if="entry.relatedSprint"> / {{ formatSprint(entry.relatedSprint) }}</template></span></div><div v-if="entry.technologies.length" class="journal-detail-block"><span class="journal-detail-label">TECHNOLOGIES</span><p>{{ entry.technologies.join(' · ') }}</p></div><div v-if="entry.tasks.length" class="journal-detail-block"><span class="journal-detail-label">WORK COMPLETED</span><ul><li v-for="task in entry.tasks" :key="task">{{ task }}</li></ul></div><div v-if="entry.challenges?.length" class="journal-detail-block"><span class="journal-detail-label">CHALLENGES</span><ul><li v-for="challenge in entry.challenges" :key="challenge">{{ challenge }}</li></ul></div><div v-if="entry.decisions?.length" class="journal-detail-block"><span class="journal-detail-label">DECISIONS</span><ul><li v-for="decision in entry.decisions" :key="decision">{{ decision }}</li></ul></div><div v-if="entry.result" class="journal-detail-block"><span class="journal-detail-label">RESULT</span><p>{{ entry.result }}</p></div><div v-if="entry.nextSteps?.length" class="journal-detail-block journal-detail-block--next"><span class="journal-detail-label">NEXT</span><ul><li v-for="step in entry.nextSteps" :key="step">{{ step }}</li></ul></div></div></article></div><p v-if="journalEntries.length > 5" class="journal-scroll-note">Scroll for older entries <span aria-hidden="true">↓</span> / {{ journalEntries.length - 5 }} more</p></section>
+
+      <footer id="contact" data-section class="contact-channel"><div class="section-index"><span>CH. 05</span><span>Open channel</span></div><div class="contact-heading"><p class="console-kicker">Signal received / next step</p><h2>Have a<br /><em>problem<br/>?</em></h2><p>For a project, internship, collaboration, or simply a conversation about how software gets made.</p></div><div class="contact-links"><a v-for="link in socialLinks" :key="link.label" :href="link.href" :target="link.external ? '_blank' : undefined" :rel="link.external ? 'noreferrer' : undefined"><span>{{ link.label }}</span><small>Open channel</small></a></div><div class="contact-footer"><span>DVDB / SYS</span><span>Built with Vue, TypeScript, and intent.</span><a href="#top">Return to top</a></div></footer>
+    </div>
   </div>
 </template>
+
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { aboutData } from '../data/about'
+import { workLogEntries } from '../data/journal'
+import { socialLinks } from '../config/site'
+import { fetchActivity } from '../services/activity'
 import { fetchProjects } from '../services/projects'
+import type { GitCommit } from '../types/journal'
 import type { Project } from '../types/project'
+
+const channels = [{ id: 'work', label: 'Work', code: '01' }, { id: 'about', label: 'Profile', code: '02' }, { id: 'stack', label: 'Stack', code: '03' }, { id: 'journal', label: 'Journal', code: '04' }, { id: 'contact', label: 'Contact', code: '05' }]
+const skillGroups = { Languages: ['Java', 'PHP', 'C#', 'JavaScript', 'TypeScript'], Frameworks: ['Spring Boot', 'Vue.js', 'Laravel'], Systems: ['SQL', 'REST APIs', 'Git', 'Docker', 'CI/CD'], Curiosity: ['AI experiments', 'Architecture', 'Integrations'] }
+const activeChannel = ref('work')
+const openProject = ref('portfolio-workspace')
+const openEntry = ref(workLogEntries[0]?.id ?? '')
 const projects = ref<Project[]>([])
-onMounted(async () => {
-  projects.value = (await fetchProjects()).projects
-})
+const activity = ref<{ commits: GitCommit[]; errors: string[] }>({ commits: [], errors: [] })
+const projectsLoading = ref(true)
+const projectErrors = ref<string[]>([])
+const journalEntries = computed(() => [...workLogEntries].sort((a, b) => Date.parse(b.date) - Date.parse(a.date)))
+const activityLabel = computed(() => activity.value.commits.length ? 'SIGNAL LOCKED' : 'SIGNAL IDLE')
+const signalBars = computed(() => { const buckets = Array.from({ length: 18 }, () => 0); const now = Date.now(); activity.value.commits.forEach((commit) => { const weeksAgo = Math.floor((now - Date.parse(commit.date)) / (1000 * 60 * 60 * 24 * 7)); const bucket = Math.max(0, Math.min(17, 17 - weeksAgo)); buckets[bucket] += 1 }); const peak = Math.max(...buckets, 1); return buckets.map((value) => value ? 18 + (value / peak) * 82 : 8) })
+const projectRows = computed(() => projects.value.slice(0, 6).map((project) => ({ id: project.id, name: project.name, label: project.private ? 'Private School Project' : `${project.source} / ${project.language ?? 'Repository'}`, description: project.description || 'Repository description unavailable.', technologies: project.topics.length ? project.topics : [project.language ?? 'Software engineering'], url: project.url, updatedAt: project.updatedAt, private: project.private, privateNote: project.privateNote })))
+function toggleProject(id: string): void { openProject.value = openProject.value === id ? '' : id }
+function formatDate(date: string): string { return new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(date)) }
+function formatSprint(sprint: string): string { return sprint.replace(/-/g, ' / ').toUpperCase() }
+onMounted(async () => { const [projectResult, activityResult] = await Promise.all([fetchProjects(), fetchActivity()]); projects.value = projectResult.projects; projectErrors.value = projectResult.errors; activity.value = { commits: activityResult.commits, errors: activityResult.errors }; projectsLoading.value = false; const observer = new globalThis.IntersectionObserver((entries) => { const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]; if (visible?.target instanceof globalThis.HTMLElement && visible.target.id !== 'home') activeChannel.value = visible.target.id }, { rootMargin: '-20% 0px -60% 0px', threshold: [0.1, 0.3, 0.6] }); globalThis.document.querySelectorAll('[data-section]').forEach((section) => observer.observe(section)) })
 </script>
