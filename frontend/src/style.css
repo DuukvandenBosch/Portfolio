@@ -88,6 +88,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-
 .project-signal__detail p { max-width: 560px; color: #c4c7bc; line-height: 1.5; margin: 0; }
 .detail-meta { display: grid; gap: 14px; font: 10px var(--mono); color: var(--muted); text-transform: uppercase; }
 .detail-meta a { color: var(--acid); text-decoration: underline; text-underline-offset: 4px; }
+.private-project-note { color: var(--acid); }
 .data-note { font: 11px/1.4 var(--mono); color: var(--muted); border: 1px solid var(--line); padding: 14px; margin: 22px 0 0; }
 
 .profile-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 360px); gap: 60px; padding: 90px 0; }
@@ -114,14 +115,23 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-
 .journal-signal button span, .journal-signal button small, .journal-signal button b { font: 10px var(--mono); color: var(--muted); text-transform: uppercase; font-weight: 400; }
 .journal-signal button strong { font-size: clamp(1.3rem, 2.3vw, 2rem); font-weight: 500; letter-spacing: -0.05em; }
 .journal-signal button b { text-align: right; }
-.journal-signal__body { padding: 0 0 25px 120px; max-width: 650px; }
+.journal-signal__body { display: grid; grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr); gap: 28px 44px; padding: 0 0 28px 120px; max-width: 1000px; }
+.journal-summary { grid-row: span 2; }
 .journal-signal__body p { color: #c4c7bc; line-height: 1.5; margin: 0 0 15px; }
-.journal-signal__body span { font: 10px var(--mono); color: var(--acid); text-transform: uppercase; }
+.journal-summary > span { font: 10px var(--mono); color: var(--acid); text-transform: uppercase; }
+.journal-detail-block { border-top: 1px solid var(--line); padding-top: 13px; }
+.journal-detail-label { display: block; margin-bottom: 10px; color: var(--acid); font: 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; }
+.journal-detail-block p { margin: 0; font-size: 13px; }
+.journal-detail-block ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.journal-detail-block li { color: #c4c7bc; font-size: 13px; line-height: 1.4; padding-left: 16px; position: relative; }
+.journal-detail-block li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 5px; height: 1px; background: var(--acid); }
+.journal-detail-block--next { grid-column: 2; }
 
 .contact-channel { background: var(--acid); color: var(--ink); padding-bottom: 28px; }
 .contact-channel .section-index { border-bottom-color: #7b9b25; }
 .contact-channel .section-index span:first-child { color: var(--ink); }
 .contact-heading { padding: 100px 0 70px; display: grid; grid-template-columns: 1fr 300px; gap: 60px; align-items: end; }
+.contact-heading h2 { max-width: 100%; padding-right: clamp(10px, 3vw, 58px); text-wrap: balance; }
 .contact-heading .console-kicker { color: var(--ink); }
 .contact-heading h2 em { color: var(--ink); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 7px; }
 .contact-heading > p:last-child { color: #24291a; }
@@ -152,6 +162,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-
   .hero-coordinates { font-size: 9px; }
   .channel-section, .contact-channel { padding: 60px 20px 80px; }
   .channel-intro, .profile-grid, .stack-heading, .journal-heading, .contact-heading { grid-template-columns: 1fr; gap: 35px; padding: 65px 0 45px; }
+  .contact-heading h2 { max-width: calc(100vw - 40px); padding-right: clamp(8px, 4vw, 24px); }
   .channel-intro h2, .profile-grid h2, .stack-heading h2, .journal-heading h2, .contact-heading h2 { font-size: clamp(4rem, 17vw, 8rem); }
   .project-signal__trigger { grid-template-columns: 35px 1fr 65px; gap: 10px; }
   .project-signal__type { grid-column: 2; grid-row: 2; }
@@ -162,7 +173,9 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-
   .skill-row__items { font-size: 18px; gap: 8px 14px; }
   .journal-signal button { grid-template-columns: 70px 1fr 45px; gap: 10px; }
   .journal-signal button small { display: none; }
-  .journal-signal__body { padding-left: 70px; }
+  .journal-signal__body { grid-template-columns: 1fr; gap: 24px; padding-left: 70px; }
+  .journal-summary { grid-row: auto; }
+  .journal-detail-block--next { grid-column: auto; }
   .contact-links { grid-template-columns: 1fr 1fr; }
   .contact-links a:nth-child(2n) { border-right: 0; padding-left: 15px; }
   .contact-links a:nth-child(n + 3) { border-top: 1px solid #7b9b25; }

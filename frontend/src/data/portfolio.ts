@@ -1,6 +1,16 @@
 import type { FeaturedProject } from '../types/project'
-/** Add repository URLs here to curate projects shown on the home page. */
-export const featuredProjects: Record<string, FeaturedProject> = {}
+
+export interface ProjectCuration extends FeaturedProject {
+  include?: boolean
+  order?: number
+}
+
+/**
+ * Optional public-repository curation. When populated, only listed URLs are shown.
+ * Leave empty to show all eligible public repositories from the configured profiles.
+ */
+export const publicProjectCuration: Record<string, ProjectCuration> = {}
+
 export const skills = [
   'Java',
   'Spring Boot',
