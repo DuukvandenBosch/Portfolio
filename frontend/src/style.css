@@ -129,6 +129,16 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-
 .journal-detail-block li { color: #c4c7bc; font-size: 13px; line-height: 1.4; padding-left: 16px; position: relative; }
 .journal-detail-block li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 5px; height: 1px; background: var(--acid); }
 .journal-detail-block--next { grid-column: 2; }
+.journal-screenshot { grid-column: 1 / -1; margin: 8px 0 0; max-width: 860px; }
+.journal-screenshot__trigger { display: block; width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 3px; background: #151712; cursor: zoom-in; }
+.journal-screenshot__trigger:hover { border-color: var(--acid); }
+.journal-screenshot__trigger img { display: block; width: 100%; max-width: 100%; height: auto; border: 1px solid #292d25; }
+.journal-screenshot figcaption { margin-top: 11px; color: var(--muted); font-size: 12px; line-height: 1.45; }
+.screenshot-lightbox { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 5vw; background: #11120ff2; }
+.screenshot-lightbox__dialog { position: relative; width: min(1100px, 100%); max-height: 90vh; overflow: auto; padding: 42px 18px 18px; border: 1px solid var(--line); background: #151712; }
+.screenshot-lightbox__dialog img { display: block; width: 100%; max-height: 72vh; object-fit: contain; }
+.screenshot-lightbox__dialog p { margin: 14px 0 0; color: #c4c7bc; font-size: 13px; line-height: 1.45; }
+.screenshot-lightbox__close { position: absolute; top: 13px; right: 18px; border: 0; padding: 0; color: var(--acid); background: transparent; cursor: pointer; font: 10px var(--mono); text-transform: uppercase; }
 
 .contact-channel { background: var(--acid); color: var(--ink); padding-bottom: 28px; }
 .contact-channel .section-index { border-bottom-color: #7b9b25; }
@@ -179,6 +189,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-
   .journal-signal__body { grid-template-columns: 1fr; gap: 24px; padding-left: 70px; }
   .journal-summary { grid-row: auto; }
   .journal-detail-block--next { grid-column: auto; }
+  .journal-screenshot { grid-column: auto; }
   .journal-list { max-height: 28rem; }
   .journal-scroll-note { margin-left: 70px; }
   .contact-links { grid-template-columns: 1fr 1fr; }

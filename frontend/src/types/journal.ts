@@ -36,9 +36,16 @@ export interface WorkLogEntry {
   learned?: string
   reflection?: string
   nextSteps?: string[]
+  screenshot?: WorkLogScreenshot
   images?: JournalImage[]
   links?: Array<{ label: string; url: string }>
   placeholder?: boolean
+}
+
+export interface WorkLogScreenshot {
+  src: string
+  alt: string
+  caption: string
 }
 
 export interface SprintArticle {
