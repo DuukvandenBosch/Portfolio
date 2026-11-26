@@ -6,8 +6,8 @@ import type { Project } from '../types/project'
  */
 export const privateSchoolProjects: Project[] = [
   {
-    id: 'private-ai-fortune-teller',
-    name: 'AI Fortune Teller',
+    id: 'private-genai-exposed',
+    name: 'GenAI Exposed',
     description:
       'An experimental conversational AI concept exploring how systems turn personal input into assumptions about a visitor.',
     source: 'Private School',
